@@ -1,0 +1,7 @@
+# Enable auto-env through the sdkman_auto_env config
+# or run the following command: `sdk env install`
+# Add key=value pairs of SDKs to use below
+java=17.0.8-zulu
+gradle=8.5
+kotlin=1.9.21
+quarkus=3.6.0
