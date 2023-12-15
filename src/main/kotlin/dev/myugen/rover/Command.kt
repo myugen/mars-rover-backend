@@ -10,6 +10,9 @@ data class Command(private val value: String) {
         if (value=="R") {
             return  listOf(currentLocation.copy(direction = currentLocation.direction.turnRight))
         }
+        if (value=="L") {
+            return  listOf(currentLocation.copy(direction = currentLocation.direction.turnLeft))
+        }
         throw RuntimeException("Invalid command")
     }
 }
