@@ -14,59 +14,27 @@ import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 import java.util.stream.Stream
 
-/*class CommandCalculationProvider : ArgumentsProvider {
+class CommandCalculationProvider : ArgumentsProvider {
     override fun provideArguments(p0: ExtensionContext?): Stream<out Arguments> {
         return Stream.of(
-            Arguments.of("turning right", "R", listOf(Location(Point(0, 0), East))),
-            // Arguments.of("turning left", "L", listOf(Location(Point(0, 0), West))),
-
-        )
-    }
-}*/
-
-class CommandCalculationProviderForTurningRight : ArgumentsProvider {
-    override fun provideArguments(p0: ExtensionContext?): Stream<out Arguments> {
-        return Stream.of(
-            Arguments.of(listOf(Location(Point(0, 0), East)), North),
-            Arguments.of(listOf(Location(Point(0, 0), South)), East),
-            Arguments.of(listOf(Location(Point(0, 0), West)), South),
-            Arguments.of(listOf(Location(Point(0, 0), North)), West),
-            // Arguments.of("R", listOf(Location(Point(0, 0), South)), East),
-            // Arguments.of("turning left", "L", listOf(Location(Point(0, 0), West))),
-
+            Arguments.of(listOf(Location(Point(0, 0), East)), North, "R", "turning right"),
+            Arguments.of(listOf(Location(Point(0, 0), South)), East, "R", "turning right"),
+            Arguments.of(listOf(Location(Point(0, 0), West)), South, "R", "turning right"),
+            Arguments.of(listOf(Location(Point(0, 0), North)), West, "R", "turning right"),
+            Arguments.of(listOf(Location(Point(0, 0), West)), North, "L", "turning left"),
+            Arguments.of(listOf(Location(Point(0, 0), South)), West, "L", "turning left"),
+            Arguments.of(listOf(Location(Point(0, 0), East)), South, "L", "turning left"),
+            Arguments.of(listOf(Location(Point(0, 0), North)), East, "L", "turning left")
         )
     }
 }
-
-class CommandCalculationProviderForTurningLeft : ArgumentsProvider {
-    override fun provideArguments(p0: ExtensionContext?): Stream<out Arguments> {
-        return Stream.of(
-            Arguments.of(listOf(Location(Point(0, 0), West)), North),
-             Arguments.of(listOf(Location(Point(0, 0), South)), West),
-             Arguments.of(listOf(Location(Point(0, 0), East)), South),
-            Arguments.of(listOf(Location(Point(0, 0), North)), East)
-
-        )
-    }
-}
-
-
 
 class CommandShould {
 
-    @ParameterizedTest(name = "calculate turning right from give current location when source direction is {1}")
-    @ArgumentsSource(CommandCalculationProviderForTurningRight::class)
-    fun `calculate path over`(expectedPath: Path, sourceDirection: Direction) {
-        val command = Command("R")
-        val currentLocation = Location(Point(0, 0), sourceDirection)
-        val result = command.calculatePathOver(currentLocation)
-        Assertions.assertEquals(expectedPath, result)
-    }
-
-    @ParameterizedTest(name = "calculate turning left from give current location when source direction is {1}")
-    @ArgumentsSource(CommandCalculationProviderForTurningLeft::class)
-    fun `calculate path over 2`(expectedPath: Path, sourceDirection: Direction) {
-        val command = Command("L")
+    @ParameterizedTest(name = "calculate {3} from give current location when source direction is {1}")
+    @ArgumentsSource(CommandCalculationProvider::class)
+    fun `calculate path over 1`(expectedPath: Path, sourceDirection: Direction, commandValue: String, commandName: String) {
+        val command = Command(commandValue)
         val currentLocation = Location(Point(0, 0), sourceDirection)
         val result = command.calculatePathOver(currentLocation)
         Assertions.assertEquals(expectedPath, result)
