@@ -11,6 +11,10 @@ import dev.myugen.geography.Point
 data class Command(private val value: String) {
     fun calculatePathOver(currentLocation: Location): Path {
 
+        if (value == "F") {
+            val currentYvalue = currentLocation.point.y
+            return listOf(currentLocation.copy(point = currentLocation.point.copy(y = currentYvalue + 1)))
+        }
         if (value == "L") {
             return listOf(currentLocation.copy(direction = currentLocation.direction.turnLeft))
         }

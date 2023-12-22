@@ -4,7 +4,6 @@ import dev.myugen.direction.*
 import dev.myugen.geography.Location
 import dev.myugen.geography.Path
 import dev.myugen.geography.Point
-import io.quarkus.test.junit.QuarkusTest
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtensionContext
@@ -38,5 +37,37 @@ class CommandShould {
         val currentLocation = Location(Point(0, 0), sourceDirection)
         val result = command.calculatePathOver(currentLocation)
         Assertions.assertEquals(expectedPath, result)
+    }
+
+    @Test
+    fun `calculate move command with source 0 0 north`() {
+        val command = Command("F")
+        val currentLocation = Location(Point(0, 0), North)
+        val result = command.calculatePathOver(currentLocation)
+        val expected: List<Location> = listOf(Location(Point(0, 1), North))
+
+        Assertions.assertEquals(expected, result)
+    }
+
+    @Test
+    fun `calculate move command with source 0 1 north`() {
+        val command = Command("F")
+        val currentLocation = Location(Point(0, 1), North)
+
+        val result = command.calculatePathOver(currentLocation)
+        val expected: List<Location> = listOf(Location(Point(0, 2), North))
+
+        Assertions.assertEquals(expected, result)
+    }
+
+    @Test
+    fun `calculate move command with source 0 2 north`() {
+        val command = Command("F")
+        val currentLocation = Location(Point(0, 2), North)
+
+        val result = command.calculatePathOver(currentLocation)
+        val expected: List<Location> = listOf(Location(Point(0, 3), North))
+
+        Assertions.assertEquals(expected, result)
     }
 }
