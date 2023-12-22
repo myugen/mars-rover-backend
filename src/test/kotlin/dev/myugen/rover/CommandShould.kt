@@ -38,6 +38,18 @@ class CommandCalculationProviderForTurningRight : ArgumentsProvider {
     }
 }
 
+class CommandCalculationProviderForTurningLeft : ArgumentsProvider {
+    override fun provideArguments(p0: ExtensionContext?): Stream<out Arguments> {
+        return Stream.of(
+            Arguments.of(listOf(Location(Point(0, 0), West)), North),
+             Arguments.of(listOf(Location(Point(0, 0), South)), West),
+             Arguments.of(listOf(Location(Point(0, 0), East)), South),
+            Arguments.of(listOf(Location(Point(0, 0), North)), East)
+
+        )
+    }
+}
+
 
 
 class CommandShould {
@@ -51,32 +63,12 @@ class CommandShould {
         Assertions.assertEquals(expectedPath, result)
     }
 
-
-
-    @Test
-    fun `calculate turning left give current location when source direction is north`() {
+    @ParameterizedTest(name = "calculate turning left from give current location when source direction is {1}")
+    @ArgumentsSource(CommandCalculationProviderForTurningLeft::class)
+    fun `calculate path over 2`(expectedPath: Path, sourceDirection: Direction) {
         val command = Command("L")
-        val currentLocation = Location(Point(0, 0), North)
+        val currentLocation = Location(Point(0, 0), sourceDirection)
         val result = command.calculatePathOver(currentLocation)
-        val expected = listOf(Location(Point(0, 0), West))
-        Assertions.assertEquals(expected, result)
-    }
-
-    @Test
-    fun `calculate turning left give current location when source direction is west`() {
-        val command = Command("L")
-        val currentLocation = Location(Point(0, 0), West)
-        val result = command.calculatePathOver(currentLocation)
-        val expected = listOf(Location(Point(0, 0), South))
-        Assertions.assertEquals(expected, result)
-    }
-
-    @Test
-    fun `calculate turning left give current location when source direction is south`() {
-        val command = Command("L")
-        val currentLocation = Location(Point(0, 0), South)
-        val result = command.calculatePathOver(currentLocation)
-        val expected = listOf(Location(Point(0, 0), East))
-        Assertions.assertEquals(expected, result)
+        Assertions.assertEquals(expectedPath, result)
     }
 }

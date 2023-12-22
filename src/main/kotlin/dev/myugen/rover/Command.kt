@@ -18,6 +18,10 @@ data class Command(private val value: String) {
             if (currentLocation.direction == South) {
                 return listOf(currentLocation.copy(direction = East))
             }
+            if (currentLocation.direction == East) {
+                return listOf(currentLocation.copy(direction = North))
+            }
+
             return listOf(currentLocation.copy(direction = West))
         }
 
