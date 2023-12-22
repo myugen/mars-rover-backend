@@ -5,5 +5,5 @@ data object South : Direction {
         get() = West
 
     override val turnRight: Direction
-        get() = East
+        get() = West
 }
