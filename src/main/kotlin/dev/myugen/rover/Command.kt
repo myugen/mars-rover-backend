@@ -10,12 +10,22 @@ import dev.myugen.geography.Point
 
 data class Command(private val value: String) {
     fun calculatePathOver(currentLocation: Location): Path {
-        if (value=="R") {
-            return listOf(currentLocation.copy(direction = currentLocation.direction.turnRight))
+
+        if (value == "L") {
+            if (currentLocation.direction == West) {
+                return listOf(currentLocation.copy(direction = South))
+            }
+            if (currentLocation.direction == South) {
+                return listOf(currentLocation.copy(direction = East))
+            }
+            return listOf(currentLocation.copy(direction = West))
         }
+
+        return listOf(currentLocation.copy(direction = currentLocation.direction.turnRight))
+
+
         /*if (value=="L") {
             return  listOf(currentLocation.copy(direction = currentLocation.direction.turnLeft))
         }*/
-        throw RuntimeException("Invalid command")
     }
 }

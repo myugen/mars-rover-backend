@@ -4,7 +4,9 @@ import dev.myugen.direction.*
 import dev.myugen.geography.Location
 import dev.myugen.geography.Path
 import dev.myugen.geography.Point
+import io.quarkus.test.junit.QuarkusTest
 import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
@@ -36,6 +38,8 @@ class CommandCalculationProviderForTurningRight : ArgumentsProvider {
     }
 }
 
+
+
 class CommandShould {
 
     @ParameterizedTest(name = "calculate turning right from give current location when source direction is {1}")
@@ -45,5 +49,34 @@ class CommandShould {
         val currentLocation = Location(Point(0, 0), sourceDirection)
         val result = command.calculatePathOver(currentLocation)
         Assertions.assertEquals(expectedPath, result)
+    }
+
+
+
+    @Test
+    fun `calculate turning left give current location when source direction is north`() {
+        val command = Command("L")
+        val currentLocation = Location(Point(0, 0), North)
+        val result = command.calculatePathOver(currentLocation)
+        val expected = listOf(Location(Point(0, 0), West))
+        Assertions.assertEquals(expected, result)
+    }
+
+    @Test
+    fun `calculate turning left give current location when source direction is west`() {
+        val command = Command("L")
+        val currentLocation = Location(Point(0, 0), West)
+        val result = command.calculatePathOver(currentLocation)
+        val expected = listOf(Location(Point(0, 0), South))
+        Assertions.assertEquals(expected, result)
+    }
+
+    @Test
+    fun `calculate turning left give current location when source direction is south`() {
+        val command = Command("L")
+        val currentLocation = Location(Point(0, 0), South)
+        val result = command.calculatePathOver(currentLocation)
+        val expected = listOf(Location(Point(0, 0), East))
+        Assertions.assertEquals(expected, result)
     }
 }
