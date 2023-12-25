@@ -13,7 +13,7 @@ class RoverShould {
     fun `receive commands and move over the planet`() {
         val rover = Rover.landOnto(Location(Point(0, 0), North))
 
-        rover.execute(Commands("LLFFFRFF"))
+        rover.execute(Command("LLFFFRFF"))
 
         Assertions.assertEquals(rover.currentLocation(), Location(Point(-2, -3), West))
     }

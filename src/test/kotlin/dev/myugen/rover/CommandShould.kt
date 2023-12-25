@@ -2,9 +2,9 @@ package dev.myugen.rover
 
 import org.junit.jupiter.api.Test
 
-class CommandsShould {
+internal class CommandShould {
     @Test
     fun `calculate a new path from given current location`() {
-        
+
     }
 }
