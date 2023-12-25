@@ -4,4 +4,4 @@ import dev.myugen.direction.Direction
 
 typealias Path = List<Location>
 
-data class Location(private val point: Point, private val direction: Direction)
+data class Location(val point: Point, val direction: Direction)
