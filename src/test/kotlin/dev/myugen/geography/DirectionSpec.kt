@@ -8,7 +8,7 @@ import io.kotest.core.spec.style.WordSpec
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 
-class DirectionTest : WordSpec({
+internal class DirectionSpec : WordSpec({
     listOf(
         row(North, East, West),
         row(East, South, North),

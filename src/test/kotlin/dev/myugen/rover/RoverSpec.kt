@@ -7,7 +7,7 @@ import dev.myugen.geography.Point
 import io.kotest.core.spec.style.WordSpec
 import io.kotest.matchers.shouldBe
 
-internal class RoverTest : WordSpec({
+internal class RoverSpec : WordSpec({
     "Rover" should {
         "receive commands and move over the planet" {
             val rover = Rover.landOnto(Location(Point(0, 0), North))
