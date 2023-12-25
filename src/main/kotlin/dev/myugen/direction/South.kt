@@ -1,9 +1,9 @@
 package dev.myugen.direction
 
 data object South : Direction {
-    override val turnLeft: Direction
+    override val onLeft: Direction
         get() = East
 
-    override val turnRight: Direction
+    override val onRight: Direction
         get() = West
 }

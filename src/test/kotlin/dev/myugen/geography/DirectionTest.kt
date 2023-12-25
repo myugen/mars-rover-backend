@@ -17,11 +17,11 @@ class DirectionTest : WordSpec({
     ).map { (currentDirection, expectedRightDirection, expectedLeftDirection) ->
         "$currentDirection" should {
             "have $expectedRightDirection on its right" {
-                currentDirection.turnRight shouldBe expectedRightDirection
+                currentDirection.onRight shouldBe expectedRightDirection
             }
 
             "have $expectedLeftDirection on its left" {
-                currentDirection.turnLeft shouldBe expectedLeftDirection
+                currentDirection.onLeft shouldBe expectedLeftDirection
             }
         }
     }
