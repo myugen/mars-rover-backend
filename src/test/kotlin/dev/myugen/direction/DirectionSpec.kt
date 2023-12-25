@@ -1,9 +1,5 @@
-package dev.myugen.geography
+package dev.myugen.direction
 
-import dev.myugen.direction.East
-import dev.myugen.direction.North
-import dev.myugen.direction.South
-import dev.myugen.direction.West
 import io.kotest.core.spec.style.WordSpec
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
