@@ -8,13 +8,13 @@ import io.kotest.matchers.shouldBe
 
 class LocationSpec : WordSpec({
     "Location" should {
-        "retrieve turned right location" {
+        "turn right" {
             val location = Location(Point(0, 0), North)
 
             location.turnRight() shouldBe Location(Point(0, 0), East)
         }
 
-        "retrieve turned left location" {
+        "turn left" {
             val location = Location(Point(0, 0), North)
 
             location.turnLeft() shouldBe Location(Point(0, 0), West)
