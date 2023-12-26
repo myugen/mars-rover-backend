@@ -1,5 +1,6 @@
 package dev.myugen.rover
 
+import dev.myugen.direction.East
 import dev.myugen.direction.North
 import dev.myugen.direction.West
 import dev.myugen.geography.Location
@@ -15,6 +16,14 @@ internal class RoverSpec : WordSpec({
             rover.execute(Command("LLFFFRFF"))
 
             rover.currentLocation() shouldBe Location(Point(-2, -3), West)
+        }
+
+        "turn right" {
+            val rover = Rover.landOnto(Location(Point(0, 0), North))
+
+            rover.turnRight()
+
+            rover.currentLocation() shouldBe Location(Point(0, 0), East)
         }
     }
 })
