@@ -11,13 +11,13 @@ class Rover private constructor(private val travelledPath: Path) {
     fun currentLocation(): Location = travelledPath.currentLocation()
 
     fun turnRight() {
-        val currentLocation = currentLocation()
-        travelledPath.add(currentLocation.copy(direction = currentLocation.direction.onRight))
+        val turnedRightLocation = currentLocation().turnRight()
+        travelledPath.add(turnedRightLocation)
     }
 
     fun turnLeft() {
-        val currentLocation = currentLocation()
-        travelledPath.add(currentLocation.copy(direction = currentLocation.direction.onLeft))
+        val turnedLeftLocation = currentLocation().turnLeft()
+        travelledPath.add(turnedLeftLocation)
     }
 
     companion object {
