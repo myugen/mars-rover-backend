@@ -15,6 +15,11 @@ class Rover private constructor(private val travelledPath: Path) {
         travelledPath.add(currentLocation.copy(direction = currentLocation.direction.onRight))
     }
 
+    fun turnLeft() {
+        val currentLocation = currentLocation()
+        travelledPath.add(currentLocation.copy(direction = currentLocation.direction.onLeft))
+    }
+
     companion object {
         fun landOnto(initialLocation: Location) = Rover(Path.startsAt(initialLocation))
     }

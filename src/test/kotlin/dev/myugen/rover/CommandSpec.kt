@@ -2,6 +2,7 @@ package dev.myugen.rover
 
 import dev.myugen.direction.East
 import dev.myugen.direction.North
+import dev.myugen.direction.West
 import dev.myugen.geography.Location
 import dev.myugen.geography.Point
 import io.kotest.core.spec.style.WordSpec
@@ -13,9 +14,9 @@ internal class CommandSpec : WordSpec({
     "Command" should {
         forAll(
             row("turning right", "R", Location(Point(0, 0), North), Location(Point(0, 0), East)),
-            //row("turning left", "L", Location(Point(0, 0), North), listOf(Location(Point(0, 0), West))),
+            row("turning left", "L", Location(Point(0, 0), North), Location(Point(0, 0), West)),
 
-        ) { indication, commandValue, currentLocation, expectedLocation ->
+            ) { indication, commandValue, currentLocation, expectedLocation ->
             "execute $indication on rover" {
                 val rover = Rover.landOnto(currentLocation)
                 val command = Command(commandValue)

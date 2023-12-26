@@ -25,5 +25,13 @@ internal class RoverSpec : WordSpec({
 
             rover.currentLocation() shouldBe Location(Point(0, 0), East)
         }
+
+        "turn left" {
+            val rover = Rover.landOnto(Location(Point(0, 0), North))
+
+            rover.turnLeft()
+
+            rover.currentLocation() shouldBe Location(Point(0, 0), West)
+        }
     }
 })
