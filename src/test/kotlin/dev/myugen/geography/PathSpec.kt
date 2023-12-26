@@ -5,7 +5,7 @@ import dev.myugen.direction.North
 import io.kotest.core.spec.style.WordSpec
 import io.kotest.matchers.shouldBe
 
-class PathSpec : WordSpec({
+internal class PathSpec : WordSpec({
     "Path" should {
         "add another location" {
             val path = Path.startsAt(Location(Point(0, 0), North))

@@ -15,8 +15,8 @@ internal class CommandSpec : WordSpec({
         forAll(
             row("turning right", "R", Location(Point(0, 0), North), Location(Point(0, 0), East)),
             row("turning left", "L", Location(Point(0, 0), North), Location(Point(0, 0), West)),
-
-            ) { indication, commandValue, currentLocation, expectedLocation ->
+            row("moving forward", "F", Location(Point(0, 0), North), Location(Point(0, 1), North)),
+        ) { indication, commandValue, currentLocation, expectedLocation ->
             "execute $indication on rover" {
                 val rover = Rover.landOnto(currentLocation)
                 val command = Command(commandValue)

@@ -6,7 +6,7 @@ import dev.myugen.direction.West
 import io.kotest.core.spec.style.WordSpec
 import io.kotest.matchers.shouldBe
 
-class LocationSpec : WordSpec({
+internal class LocationSpec : WordSpec({
     "Location" should {
         "turn right" {
             val location = Location(Point(0, 0), North)
@@ -18,6 +18,12 @@ class LocationSpec : WordSpec({
             val location = Location(Point(0, 0), North)
 
             location.turnLeft() shouldBe Location(Point(0, 0), West)
+        }
+
+        "moveForward" {
+            val location = Location(Point(0, 0), North)
+
+            location.moveForward() shouldBe Location(Point(0, 1), North)
         }
     }
 

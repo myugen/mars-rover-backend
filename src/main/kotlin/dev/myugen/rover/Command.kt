@@ -5,6 +5,7 @@ data class Command(private val value: String) {
         when (value.uppercase()) {
             "R" -> rover.turnRight()
             "L" -> rover.turnLeft()
+            "F" -> rover.moveForward()
             else -> TODO()
         }
 }

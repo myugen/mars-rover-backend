@@ -33,5 +33,13 @@ internal class RoverSpec : WordSpec({
 
             rover.currentLocation() shouldBe Location(Point(0, 0), West)
         }
+
+        "move forward" {
+            val rover = Rover.landOnto(Location(Point(0, 0), North))
+
+            rover.moveForward()
+
+            rover.currentLocation() shouldBe Location(Point(0, 1), North)
+        }
     }
 })
