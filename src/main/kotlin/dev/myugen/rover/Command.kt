@@ -1,6 +1,7 @@
 package dev.myugen.rover
 
 import dev.myugen.direction.East
+import dev.myugen.direction.South
 import dev.myugen.direction.West
 import dev.myugen.geography.Location
 import dev.myugen.geography.Path
@@ -40,6 +41,12 @@ data class Command(private val value: String) {
             val yValue = currentLocation.point.y + 1
             return listOf(currentLocation.copy(point = currentLocation.point.copy(y = yValue)))
         }
+        fun withFacingSouth(): List<Location> {
+            return listOf(currentLocation.copy(point = currentLocation.point.copy(x = 0, y = 0)))
+        }
+        if (currentLocation.direction == South) {
+            return withFacingSouth()
+        }
 
         if (currentLocation.direction == West) {
             return withFacingWest()
@@ -51,4 +58,6 @@ data class Command(private val value: String) {
 
         return withFacingNorth()
     }
+
+
 }
