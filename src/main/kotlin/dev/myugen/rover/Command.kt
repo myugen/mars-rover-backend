@@ -37,8 +37,8 @@ data class Command(private val value: String) {
         }
 
         fun withFacingNorth(): List<Location> {
-            val currentYvalue = currentLocation.point.y
-            return listOf(currentLocation.copy(point = currentLocation.point.copy(y = currentYvalue + 1)))
+            val yValue = currentLocation.point.y + 1
+            return listOf(currentLocation.copy(point = currentLocation.point.copy(y = yValue)))
         }
 
         if (currentLocation.direction == West) {
