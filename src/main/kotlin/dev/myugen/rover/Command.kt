@@ -1,12 +1,9 @@
 package dev.myugen.rover
 
 import dev.myugen.direction.East
-import dev.myugen.direction.North
-import dev.myugen.direction.South
 import dev.myugen.direction.West
 import dev.myugen.geography.Location
 import dev.myugen.geography.Path
-import dev.myugen.geography.Point
 
 data class Command(private val value: String) {
     fun calculatePathOver(currentLocation: Location): Path {
@@ -39,6 +36,11 @@ data class Command(private val value: String) {
             return listOf(currentLocation.copy(point = currentLocation.point.copy(x = currentXvalue + 1)))
         }
 
+        fun withFacingNorth(): List<Location> {
+            val currentYvalue = currentLocation.point.y
+            return listOf(currentLocation.copy(point = currentLocation.point.copy(y = currentYvalue + 1)))
+        }
+
         if (currentLocation.direction == West) {
             return withFacingWest()
         }
@@ -46,7 +48,7 @@ data class Command(private val value: String) {
         if (currentLocation.direction == East) {
             return withFacingEast()
         }
-        val currentYvalue = currentLocation.point.y
-        return listOf(currentLocation.copy(point = currentLocation.point.copy(y = currentYvalue + 1)))
+
+        return withFacingNorth()
     }
 }
