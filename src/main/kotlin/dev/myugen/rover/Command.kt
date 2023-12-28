@@ -8,58 +8,54 @@ import dev.myugen.geography.Path
 
 data class Command(private val value: String) {
     fun calculatePathOver(currentLocation: Location, planetSize: PlanetSize): Path {
-
         if (value == "F") {
-            return turnFront(currentLocation, planetSize)
+            return listOf(turnFront(currentLocation, planetSize))
         }
         if (value == "L") {
-            return turnLeft(currentLocation)
+            return listOf(turnLeft(currentLocation))
         }
 
-        return turnRight(currentLocation)
+        return listOf(turnRight(currentLocation))
     }
 
-    private fun turnRight(currentLocation: Location) =
-        listOf(currentLocation.copy(direction = currentLocation.direction.turnRight))
+    private fun turnRight(currentLocation: Location) = currentLocation.copy(direction = currentLocation.direction.turnRight)
 
-    private fun turnLeft(currentLocation: Location): List<Location> {
-        return listOf(currentLocation.copy(direction = currentLocation.direction.turnLeft))
-    }
+    private fun turnLeft(currentLocation: Location): Location = currentLocation.copy(direction = currentLocation.direction.turnLeft)
 
-    private fun turnFront(currentLocation: Location, planetSize: PlanetSize): List<Location> {
+    private fun turnFront(currentLocation: Location, planetSize: PlanetSize): Location {
         val INITIAL_COORDINATE_VALUE_IN_BOTH_AXES = 0
         val DIFFERENCE_VALUE_BETWEEN_COORDINATES = 1
 
-        fun withFacingWest(): List<Location> {
+        fun withFacingWest(): Location {
             var xValue = currentLocation.point.x - DIFFERENCE_VALUE_BETWEEN_COORDINATES
             if (currentLocation.point.x == INITIAL_COORDINATE_VALUE_IN_BOTH_AXES) {
                 xValue = planetSize.x - DIFFERENCE_VALUE_BETWEEN_COORDINATES;
             }
-            return listOf(currentLocation.copy(point = currentLocation.point.copy(x = xValue)))
+            return currentLocation.copy(point = currentLocation.point.copy(x = xValue))
         }
 
-        fun withFacingEast(): List<Location> {
+        fun withFacingEast(): Location {
             var xValue = currentLocation.point.x + DIFFERENCE_VALUE_BETWEEN_COORDINATES
             if (currentLocation.point.x == planetSize.x - DIFFERENCE_VALUE_BETWEEN_COORDINATES) {
                 xValue = INITIAL_COORDINATE_VALUE_IN_BOTH_AXES;
             }
-            return listOf(currentLocation.copy(point = currentLocation.point.copy(x = xValue)))
+            return currentLocation.copy(point = currentLocation.point.copy(x = xValue))
         }
 
-        fun withFacingNorth(): List<Location> {
+        fun withFacingNorth(): Location {
             var yValue = currentLocation.point.y + DIFFERENCE_VALUE_BETWEEN_COORDINATES
             if (currentLocation.point.y == planetSize.y - DIFFERENCE_VALUE_BETWEEN_COORDINATES) {
                 yValue = INITIAL_COORDINATE_VALUE_IN_BOTH_AXES;
             }
-            return listOf(currentLocation.copy(point = currentLocation.point.copy(y = yValue)))
+            return currentLocation.copy(point = currentLocation.point.copy(y = yValue))
         }
 
-        fun withFacingSouth(): List<Location> {
+        fun withFacingSouth(): Location {
             var yValue = currentLocation.point.y - DIFFERENCE_VALUE_BETWEEN_COORDINATES
             if (currentLocation.point.y == INITIAL_COORDINATE_VALUE_IN_BOTH_AXES) {
-              yValue = planetSize.y - DIFFERENCE_VALUE_BETWEEN_COORDINATES;
+                yValue = planetSize.y - DIFFERENCE_VALUE_BETWEEN_COORDINATES;
             }
-            return listOf(currentLocation.copy(point = currentLocation.point.copy(y = yValue)))
+            return currentLocation.copy(point = currentLocation.point.copy(y = yValue))
         }
 
         if (currentLocation.direction == South) {
