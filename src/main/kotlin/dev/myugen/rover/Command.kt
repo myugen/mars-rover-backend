@@ -36,7 +36,10 @@ data class Command(private val value: String) {
         }
 
         fun withFacingEast(): List<Location> {
-            val xValue = currentLocation.point.x + 1
+            var xValue = currentLocation.point.x + 1
+            if (currentLocation.point.x == planetSize.x - 1) {
+                xValue = 0;
+            }
             return listOf(currentLocation.copy(point = currentLocation.point.copy(x = xValue)))
         }
 
