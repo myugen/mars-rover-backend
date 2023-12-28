@@ -44,7 +44,10 @@ data class Command(private val value: String) {
         }
 
         fun withFacingNorth(): List<Location> {
-            val yValue = currentLocation.point.y + 1
+            var yValue = currentLocation.point.y + 1
+            if (currentLocation.point.y == 10 - 1) {
+                yValue = 0;
+            }
             return listOf(currentLocation.copy(point = currentLocation.point.copy(y = yValue)))
         }
         fun withFacingSouth(): List<Location> {

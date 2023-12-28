@@ -50,6 +50,7 @@ class CommandCalculationProviderForEdges : ArgumentsProvider {
             Arguments.of(listOf(Location(Point(19, 0), West)), Location(Point(0, 0), West), "F", PlanetSize(20, 10), "turning front"),
             Arguments.of(listOf(Location(Point(0, 0), East)), Location(Point(9, 0), East), "F", PlanetSize(10, 10), "turning front"),
             Arguments.of(listOf(Location(Point(0, 0), East)), Location(Point(19, 0), East), "F", PlanetSize(20, 10), "turning front"),
+            Arguments.of(listOf(Location(Point(0, 0), North)), Location(Point(0, 9), North), "F", PlanetSize(10, 10), "turning front"),
         )
     }
 }
