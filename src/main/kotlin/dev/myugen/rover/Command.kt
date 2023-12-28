@@ -32,8 +32,8 @@ data class Command(private val value: String) {
         }
 
         fun withFacingEast(): List<Location> {
-            val currentXvalue = currentLocation.point.x
-            return listOf(currentLocation.copy(point = currentLocation.point.copy(x = currentXvalue + 1)))
+            val xValue = currentLocation.point.x + 1
+            return listOf(currentLocation.copy(point = currentLocation.point.copy(x = xValue)))
         }
 
         fun withFacingNorth(): List<Location> {
