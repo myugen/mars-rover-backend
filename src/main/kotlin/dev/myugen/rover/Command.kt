@@ -34,12 +34,17 @@ data class Command(private val value: String) {
             return listOf(currentLocation.copy(point = currentLocation.point.copy(x = currentXvalue - 1)))
         }
 
+        fun withFacingEast(): List<Location> {
+            val currentXvalue = currentLocation.point.x
+            return listOf(currentLocation.copy(point = currentLocation.point.copy(x = currentXvalue + 1)))
+        }
+
         if (currentLocation.direction == West) {
             return withFacingWest()
         }
+
         if (currentLocation.direction == East) {
-            val currentXvalue = currentLocation.point.x
-            return listOf(currentLocation.copy(point = currentLocation.point.copy(x = currentXvalue + 1)))
+            return withFacingEast()
         }
         val currentYvalue = currentLocation.point.y
         return listOf(currentLocation.copy(point = currentLocation.point.copy(y = currentYvalue + 1)))
