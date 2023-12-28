@@ -26,7 +26,7 @@ data class Command(private val value: String) {
         return listOf(currentLocation.copy(direction = currentLocation.direction.turnLeft))
     }
 
-    private fun turnFront(currentLocation: Location, planetSize: PlanetSize = PlanetSize(x = 10, y = 10)): List<Location> {
+    private fun turnFront(currentLocation: Location, planetSize: PlanetSize): List<Location> {
         fun withFacingWest(): List<Location> {
             var xValue = currentLocation.point.x - 1
             if (currentLocation.point.x == 0) {
