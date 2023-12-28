@@ -7,7 +7,7 @@ import dev.myugen.geography.Location
 import dev.myugen.geography.Path
 
 data class Command(private val value: String) {
-    fun calculatePathOver(currentLocation: Location, planetSize: PlanetSize = PlanetSize(x = 10, y = 10)): Path {
+    fun calculatePathOver(currentLocation: Location, planetSize: PlanetSize): Path {
 
         if (value == "F") {
             return turnFront(currentLocation, planetSize)
