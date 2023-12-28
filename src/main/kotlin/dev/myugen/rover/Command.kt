@@ -13,7 +13,8 @@ data class Command(private val value: String) {
 
         if (value == "F") {
             if (currentLocation.direction == West) {
-                return listOf(currentLocation.copy(point = currentLocation.point.copy(x = 1, y = 0)))
+                val currentXvalue = currentLocation.point.x
+                return listOf(currentLocation.copy(point = currentLocation.point.copy(x = currentXvalue - 1, y = 0)))
             }
             if (currentLocation.direction == East) {
                 val currentXvalue = currentLocation.point.x
