@@ -29,9 +29,13 @@ data class Command(private val value: String) {
     }
 
     private fun turnFront(currentLocation: Location): List<Location> {
-        if (currentLocation.direction == West) {
+        fun withFacingWest(): List<Location> {
             val currentXvalue = currentLocation.point.x
             return listOf(currentLocation.copy(point = currentLocation.point.copy(x = currentXvalue - 1)))
+        }
+
+        if (currentLocation.direction == West) {
+            return withFacingWest()
         }
         if (currentLocation.direction == East) {
             val currentXvalue = currentLocation.point.x
