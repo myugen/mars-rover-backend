@@ -10,17 +10,24 @@ data class Command(private val value: String) {
 
     fun calculatePathOver(currentLocation: Location, planetSize: PlanetSize): Path {
         val myList: MutableList<Location> = mutableListOf()
+        var currentLocationAux: Location = currentLocation
+        for (item in this.value) {
+            if (item == 'F') {
+                currentLocationAux = turnFront(currentLocationAux, planetSize)
+                myList.add(currentLocationAux)
+            }
 
-        if (value == "F") {
-            myList.add(turnFront(currentLocation, planetSize))
-            return myList.toList()
-        }
-        if (value == "L") {
-            myList.add(turnLeft(currentLocation))
-            return myList.toList()
+            if (item == 'L') {
+                currentLocationAux = turnLeft(currentLocationAux)
+                myList.add(currentLocationAux)
+            }
+
+            if (item == 'R') {
+                currentLocationAux = turnRight(currentLocationAux)
+                myList.add(currentLocationAux)
+            }
         }
 
-        myList.add(turnRight(currentLocation))
         return myList.toList()
     }
 
