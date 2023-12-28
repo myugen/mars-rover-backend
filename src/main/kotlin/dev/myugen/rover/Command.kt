@@ -15,10 +15,14 @@ data class Command(private val value: String) {
             return turnFront(currentLocation)
         }
         if (value == "L") {
-            return listOf(currentLocation.copy(direction = currentLocation.direction.turnLeft))
+            return turnLeft(currentLocation)
         }
 
         return listOf(currentLocation.copy(direction = currentLocation.direction.turnRight))
+    }
+
+    private fun turnLeft(currentLocation: Location): List<Location> {
+        return listOf(currentLocation.copy(direction = currentLocation.direction.turnLeft))
     }
 
     private fun turnFront(currentLocation: Location): List<Location> {
