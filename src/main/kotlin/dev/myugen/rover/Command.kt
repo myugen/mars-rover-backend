@@ -18,8 +18,11 @@ data class Command(private val value: String) {
             return turnLeft(currentLocation)
         }
 
-        return listOf(currentLocation.copy(direction = currentLocation.direction.turnRight))
+        return turnRight(currentLocation)
     }
+
+    private fun turnRight(currentLocation: Location) =
+        listOf(currentLocation.copy(direction = currentLocation.direction.turnRight))
 
     private fun turnLeft(currentLocation: Location): List<Location> {
         return listOf(currentLocation.copy(direction = currentLocation.direction.turnLeft))
