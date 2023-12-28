@@ -27,36 +27,41 @@ data class Command(private val value: String) {
     }
 
     private fun turnFront(currentLocation: Location, planetSize: PlanetSize): List<Location> {
+        val INITIAL_COORDINATE_VALUE_IN_BOTH_AXES = 0
+        val DIFFERENCE_VALUE_BETWEEN_COORDINATES = 1
+
         fun withFacingWest(): List<Location> {
-            var xValue = currentLocation.point.x - 1
-            if (currentLocation.point.x == 0) {
-                xValue = planetSize.x - 1;
+            var xValue = currentLocation.point.x - DIFFERENCE_VALUE_BETWEEN_COORDINATES
+            if (currentLocation.point.x == INITIAL_COORDINATE_VALUE_IN_BOTH_AXES) {
+                xValue = planetSize.x - DIFFERENCE_VALUE_BETWEEN_COORDINATES;
             }
             return listOf(currentLocation.copy(point = currentLocation.point.copy(x = xValue)))
         }
 
         fun withFacingEast(): List<Location> {
-            var xValue = currentLocation.point.x + 1
-            if (currentLocation.point.x == planetSize.x - 1) {
-                xValue = 0;
+            var xValue = currentLocation.point.x + DIFFERENCE_VALUE_BETWEEN_COORDINATES
+            if (currentLocation.point.x == planetSize.x - DIFFERENCE_VALUE_BETWEEN_COORDINATES) {
+                xValue = INITIAL_COORDINATE_VALUE_IN_BOTH_AXES;
             }
             return listOf(currentLocation.copy(point = currentLocation.point.copy(x = xValue)))
         }
 
         fun withFacingNorth(): List<Location> {
-            var yValue = currentLocation.point.y + 1
-            if (currentLocation.point.y == planetSize.y - 1) {
-                yValue = 0;
+            var yValue = currentLocation.point.y + DIFFERENCE_VALUE_BETWEEN_COORDINATES
+            if (currentLocation.point.y == planetSize.y - DIFFERENCE_VALUE_BETWEEN_COORDINATES) {
+                yValue = INITIAL_COORDINATE_VALUE_IN_BOTH_AXES;
             }
             return listOf(currentLocation.copy(point = currentLocation.point.copy(y = yValue)))
         }
+
         fun withFacingSouth(): List<Location> {
-            var yValue = currentLocation.point.y - 1
-            if (currentLocation.point.y == 0) {
-              yValue = planetSize.y - 1;
+            var yValue = currentLocation.point.y - DIFFERENCE_VALUE_BETWEEN_COORDINATES
+            if (currentLocation.point.y == INITIAL_COORDINATE_VALUE_IN_BOTH_AXES) {
+              yValue = planetSize.y - DIFFERENCE_VALUE_BETWEEN_COORDINATES;
             }
             return listOf(currentLocation.copy(point = currentLocation.point.copy(y = yValue)))
         }
+
         if (currentLocation.direction == South) {
             return withFacingSouth()
         }
