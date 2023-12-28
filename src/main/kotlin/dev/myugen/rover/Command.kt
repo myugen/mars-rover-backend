@@ -12,21 +12,25 @@ data class Command(private val value: String) {
     fun calculatePathOver(currentLocation: Location): Path {
 
         if (value == "F") {
-            if (currentLocation.direction == West) {
-                val currentXvalue = currentLocation.point.x
-                return listOf(currentLocation.copy(point = currentLocation.point.copy(x = currentXvalue - 1)))
-            }
-            if (currentLocation.direction == East) {
-                val currentXvalue = currentLocation.point.x
-                return listOf(currentLocation.copy(point = currentLocation.point.copy(x = currentXvalue + 1)))
-            }
-            val currentYvalue = currentLocation.point.y
-            return listOf(currentLocation.copy(point = currentLocation.point.copy(y = currentYvalue + 1)))
+            return turnFront(currentLocation)
         }
         if (value == "L") {
             return listOf(currentLocation.copy(direction = currentLocation.direction.turnLeft))
         }
 
         return listOf(currentLocation.copy(direction = currentLocation.direction.turnRight))
+    }
+
+    private fun turnFront(currentLocation: Location): List<Location> {
+        if (currentLocation.direction == West) {
+            val currentXvalue = currentLocation.point.x
+            return listOf(currentLocation.copy(point = currentLocation.point.copy(x = currentXvalue - 1)))
+        }
+        if (currentLocation.direction == East) {
+            val currentXvalue = currentLocation.point.x
+            return listOf(currentLocation.copy(point = currentLocation.point.copy(x = currentXvalue + 1)))
+        }
+        val currentYvalue = currentLocation.point.y
+        return listOf(currentLocation.copy(point = currentLocation.point.copy(y = currentYvalue + 1)))
     }
 }
