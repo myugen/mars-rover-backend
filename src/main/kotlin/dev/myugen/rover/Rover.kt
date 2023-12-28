@@ -3,7 +3,7 @@ package dev.myugen.rover
 import dev.myugen.geography.Location
 import dev.myugen.geography.Path
 
-class Rover private constructor(private val initialLocation: Location) {
+class Rover private constructor(private val initialLocation: Location, private val planetSize: PlanetSize = PlanetSize(10,  10)) {
     fun execute(command: Command): Unit {
         val path: Path = command.calculatePathOver(currentLocation())
     }
