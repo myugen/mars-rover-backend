@@ -35,6 +35,7 @@ class CommandCalculationProviderAlt : ArgumentsProvider {
             Arguments.of(listOf(Location(Point(2, 1), East)), Location(Point(1, 1), East), "F", "turning front"),
             Arguments.of(listOf(Location(Point(1, 0), West)), Location(Point(2, 0), West), "F", "turning front"),
             Arguments.of(listOf(Location(Point(0, 0), West)), Location(Point(1, 0), West), "F", "turning front"),
+            Arguments.of(listOf(Location(Point(1, 1), West)), Location(Point(2, 1), West), "F", "turning front"),
         )
     }
 }
