@@ -15,7 +15,7 @@ class RoverShould {
 
         rover.execute(Command("LLFFFRFF"))
 
-        Assertions.assertEquals(rover.currentLocation(), Location(Point(-2, -3), West))
+        Assertions.assertEquals(rover.currentLocation(), Location(Point(8, 7), West))
     }
 
 
