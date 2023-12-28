@@ -43,6 +43,15 @@ class CommandCalculationProviderAlt : ArgumentsProvider {
     }
 }
 
+class CommandCalculationProviderForEdges : ArgumentsProvider {
+    override fun provideArguments(p0: ExtensionContext?): Stream<out Arguments> {
+        return Stream.of(
+            Arguments.of(listOf(Location(Point(9, 0), West)), Location(Point(0, 0), West), "F", PlanetSize(10, 10), "turning front"),
+            Arguments.of(listOf(Location(Point(19, 0), West)), Location(Point(0, 0), West), "F", PlanetSize(20, 10), "turning front"),
+        )
+    }
+}
+
 class CommandShould {
 
     @ParameterizedTest(name = "calculate {3} from give current location when source direction is {1}")
@@ -54,4 +63,14 @@ class CommandShould {
 
         Assertions.assertEquals(expectedPath, result)
     }
+
+    @ParameterizedTest(name = "calculate {4} from give current location when source direction is {1}")
+    @ArgumentsSource(CommandCalculationProviderForEdges::class)
+    fun `calculate path over edge`(expectedPath: Path, sourceLocation: Location, commandValue: String, planetSize: PlanetSize, commandName: String) {
+        val command = Command(commandValue)
+        val result = command.calculatePathOver(sourceLocation, planetSize)
+
+        Assertions.assertEquals(expectedPath, result)
+    }
+
 }

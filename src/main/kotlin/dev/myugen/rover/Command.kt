@@ -7,10 +7,10 @@ import dev.myugen.geography.Location
 import dev.myugen.geography.Path
 
 data class Command(private val value: String) {
-    fun calculatePathOver(currentLocation: Location): Path {
+    fun calculatePathOver(currentLocation: Location, planetSize: PlanetSize = PlanetSize(x = 10, y = 10)): Path {
 
         if (value == "F") {
-            return turnFront(currentLocation)
+            return turnFront(currentLocation, planetSize)
         }
         if (value == "L") {
             return turnLeft(currentLocation)
@@ -26,9 +26,12 @@ data class Command(private val value: String) {
         return listOf(currentLocation.copy(direction = currentLocation.direction.turnLeft))
     }
 
-    private fun turnFront(currentLocation: Location): List<Location> {
+    private fun turnFront(currentLocation: Location, planetSize: PlanetSize = PlanetSize(x = 10, y = 10)): List<Location> {
         fun withFacingWest(): List<Location> {
-            val xValue = currentLocation.point.x - 1
+            var xValue = currentLocation.point.x - 1
+            if (currentLocation.point.x == 0) {
+                xValue = planetSize.x - 1;
+            }
             return listOf(currentLocation.copy(point = currentLocation.point.copy(x = xValue)))
         }
 

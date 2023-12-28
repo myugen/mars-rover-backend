@@ -1,4 +1,4 @@
 package dev.myugen.rover
 
-class PlanetSize(x: Int = 10, y: Int = 10) {
+class PlanetSize(public val x: Int = 10, public val y: Int = 10) {
 }
