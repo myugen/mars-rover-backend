@@ -58,8 +58,8 @@ class CommandShould {
     @ArgumentsSource(CommandCalculationProviderAlt::class)
     fun `calculate path over`(expectedPath: Path, sourceLocation: Location, commandValue: String, commandName: String) {
         val command = Command(commandValue)
-
-        val result = command.calculatePathOver(sourceLocation)
+        val planetSize = PlanetSize(10, 10)
+        val result = command.calculatePathOver(sourceLocation, planetSize)
 
         Assertions.assertEquals(expectedPath, result)
     }
