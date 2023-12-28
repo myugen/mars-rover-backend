@@ -7,15 +7,21 @@ import dev.myugen.geography.Location
 import dev.myugen.geography.Path
 
 data class Command(private val value: String) {
+
     fun calculatePathOver(currentLocation: Location, planetSize: PlanetSize): Path {
+        val myList: MutableList<Location> = mutableListOf()
+
         if (value == "F") {
-            return listOf(turnFront(currentLocation, planetSize))
+            myList.add(turnFront(currentLocation, planetSize))
+            return myList.toList()
         }
         if (value == "L") {
-            return listOf(turnLeft(currentLocation))
+            myList.add(turnLeft(currentLocation))
+            return myList.toList()
         }
 
-        return listOf(turnRight(currentLocation))
+        myList.add(turnRight(currentLocation))
+        return myList.toList()
     }
 
     private fun turnRight(currentLocation: Location) = currentLocation.copy(direction = currentLocation.direction.turnRight)
