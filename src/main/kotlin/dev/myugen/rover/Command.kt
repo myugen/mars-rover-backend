@@ -53,7 +53,7 @@ data class Command(private val value: String) {
         fun withFacingSouth(): List<Location> {
             var yValue = currentLocation.point.y - 1
             if (currentLocation.point.y == 0) {
-              yValue = 9;
+              yValue = planetSize.y - 1;
             }
             return listOf(currentLocation.copy(point = currentLocation.point.copy(y = yValue)))
         }
