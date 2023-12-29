@@ -37,6 +37,9 @@ data class Command(private val value: String) {
     }
 
     private fun goBackwards(currentLocation: Location, planetSize: PlanetSize): Location {
+        val INITIAL_COORDINATE_VALUE_IN_BOTH_AXES = 0
+        val DIFFERENCE_VALUE_BETWEEN_COORDINATES = 1
+
         fun withFacingWest(): Location {
             return currentLocation.copy(point = currentLocation.point.copy(x = currentLocation.point.x + 1))
         }
@@ -60,7 +63,12 @@ data class Command(private val value: String) {
         if (currentLocation.direction == West) {
             return withFacingWest()
         }
-        return currentLocation.copy(point = currentLocation.point.copy(y = currentLocation.point.y - 1))
+
+        var yValue = currentLocation.point.y - DIFFERENCE_VALUE_BETWEEN_COORDINATES
+        if (currentLocation.point.y == INITIAL_COORDINATE_VALUE_IN_BOTH_AXES) {
+            yValue = planetSize.y - DIFFERENCE_VALUE_BETWEEN_COORDINATES;
+        }
+        return currentLocation.copy(point = currentLocation.point.copy(y = yValue))
     }
 
     private fun turnRight(currentLocation: Location) = currentLocation.copy(direction = currentLocation.direction.turnRight)
