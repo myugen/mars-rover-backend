@@ -41,7 +41,11 @@ data class Command(private val value: String) {
         val DIFFERENCE_VALUE_BETWEEN_COORDINATES = 1
 
         fun withFacingWest(): Location {
-            return currentLocation.copy(point = currentLocation.point.copy(x = currentLocation.point.x + 1))
+            var xValue = currentLocation.point.x + DIFFERENCE_VALUE_BETWEEN_COORDINATES
+            if (currentLocation.point.x == planetSize.x - DIFFERENCE_VALUE_BETWEEN_COORDINATES) {
+                xValue = INITIAL_COORDINATE_VALUE_IN_BOTH_AXES;
+            }
+            return currentLocation.copy(point = currentLocation.point.copy(x = xValue))
         }
 
         fun withFacingEast(): Location {
