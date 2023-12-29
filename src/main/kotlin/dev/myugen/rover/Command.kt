@@ -57,7 +57,11 @@ data class Command(private val value: String) {
         }
 
         fun withFacingSouth(): Location {
-            return currentLocation.copy(point = currentLocation.point.copy(y = currentLocation.point.y + 1))
+            var yValue = currentLocation.point.y + DIFFERENCE_VALUE_BETWEEN_COORDINATES
+            if (currentLocation.point.y == planetSize.y - DIFFERENCE_VALUE_BETWEEN_COORDINATES) {
+                yValue = INITIAL_COORDINATE_VALUE_IN_BOTH_AXES;
+            }
+            return currentLocation.copy(point = currentLocation.point.copy(y = yValue))
         }
 
         if (currentLocation.direction == South) {
