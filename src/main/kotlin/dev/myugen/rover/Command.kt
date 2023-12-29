@@ -12,6 +12,11 @@ data class Command(private val value: String) {
         val myList: MutableList<Location> = mutableListOf()
         var currentLocationAux: Location = currentLocation
         for (item in this.value) {
+            if (item == 'B') {
+                currentLocationAux = goBackwards(currentLocationAux, planetSize)
+                myList.add(currentLocationAux)
+            }
+
             if (item == 'F') {
                 currentLocationAux = turnFront(currentLocationAux, planetSize)
                 myList.add(currentLocationAux)
@@ -29,6 +34,33 @@ data class Command(private val value: String) {
         }
 
         return myList.toList()
+    }
+
+    private fun goBackwards(currentLocation: Location, planetSize: PlanetSize): Location {
+        fun withFacingWest(): Location {
+            return currentLocation.copy(point = currentLocation.point.copy(x = currentLocation.point.x + 1))
+        }
+
+        fun withFacingEast(): Location {
+            return currentLocation.copy(point = currentLocation.point.copy(x = currentLocation.point.x - 1))
+        }
+
+        fun withFacingSouth(): Location {
+            return currentLocation.copy(point = currentLocation.point.copy(y = currentLocation.point.y + 1))
+        }
+
+        if (currentLocation.direction == South) {
+            return withFacingSouth()
+        }
+
+        if (currentLocation.direction == East) {
+            return withFacingEast()
+        }
+
+        if (currentLocation.direction == West) {
+            return withFacingWest()
+        }
+        return currentLocation.copy(point = currentLocation.point.copy(y = currentLocation.point.y - 1))
     }
 
     private fun turnRight(currentLocation: Location) = currentLocation.copy(direction = currentLocation.direction.turnRight)
