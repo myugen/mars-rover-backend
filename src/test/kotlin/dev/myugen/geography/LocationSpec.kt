@@ -1,7 +1,6 @@
 package dev.myugen.geography
 
 import dev.myugen.direction.East
-import dev.myugen.direction.North
 import dev.myugen.direction.West
 import io.kotest.core.spec.style.WordSpec
 import io.kotest.matchers.shouldBe
@@ -9,21 +8,21 @@ import io.kotest.matchers.shouldBe
 internal class LocationSpec : WordSpec({
     "Location" should {
         "turn right" {
-            val location = Location(Point(0, 0), North)
+            val actual = LocationMother.origin.turnRight()
 
-            location.turnRight() shouldBe Location(Point(0, 0), East)
+            actual shouldBe LocationMother.fixture { direction = East }
         }
 
         "turn left" {
-            val location = Location(Point(0, 0), North)
+            val actual = LocationMother.origin.turnLeft()
 
-            location.turnLeft() shouldBe Location(Point(0, 0), West)
+            actual shouldBe LocationMother.fixture { direction = West }
         }
 
         "moveForward" {
-            val location = Location(Point(0, 0), North)
+            val actual = LocationMother.origin.moveForward()
 
-            location.moveForward() shouldBe Location(Point(0, 1), North)
+            actual shouldBe LocationMother.fixture { point { y = 1 } }
         }
     }
 

@@ -1,10 +1,8 @@
 package dev.myugen.rover
 
 import dev.myugen.direction.East
-import dev.myugen.direction.North
 import dev.myugen.direction.West
-import dev.myugen.geography.Location
-import dev.myugen.geography.Point
+import dev.myugen.geography.LocationMother
 import io.kotest.assertions.arrow.core.shouldBeRight
 import io.kotest.core.spec.style.WordSpec
 import io.kotest.matchers.shouldBe
@@ -12,36 +10,39 @@ import io.kotest.matchers.shouldBe
 internal class RoverSpec : WordSpec({
     "Rover" should {
         "receive commands and move over the planet" {
-            val rover = Rover.landOnto(Location(Point(0, 0), North))
+            val rover = Rover.landOnto(LocationMother.origin)
             val command = Command.of(value = "LLFFFRFF").shouldBeRight()
 
             rover.execute(command)
 
-            rover.currentLocation() shouldBe Location(Point(-2, -3), West)
+            rover.currentLocation() shouldBe LocationMother.fixture {
+                point { x = -2; y = -3 }
+                direction = West
+            }
         }
 
         "turn right" {
-            val rover = Rover.landOnto(Location(Point(0, 0), North))
+            val rover = Rover.landOnto(LocationMother.origin)
 
             rover.turnRight()
 
-            rover.currentLocation() shouldBe Location(Point(0, 0), East)
+            rover.currentLocation() shouldBe LocationMother.fixture { direction = East }
         }
 
         "turn left" {
-            val rover = Rover.landOnto(Location(Point(0, 0), North))
+            val rover = Rover.landOnto(LocationMother.origin)
 
             rover.turnLeft()
 
-            rover.currentLocation() shouldBe Location(Point(0, 0), West)
+            rover.currentLocation() shouldBe LocationMother.fixture { direction = West }
         }
 
         "move forward" {
-            val rover = Rover.landOnto(Location(Point(0, 0), North))
+            val rover = Rover.landOnto(LocationMother.origin)
 
             rover.moveForward()
 
-            rover.currentLocation() shouldBe Location(Point(0, 1), North)
+            rover.currentLocation() shouldBe LocationMother.fixture { point { y = 1 } }
         }
     }
 })
