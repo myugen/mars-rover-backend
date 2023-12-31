@@ -10,7 +10,7 @@ import io.kotest.matchers.shouldBe
 internal class RoverSpec : WordSpec({
     "Rover" should {
         "receive commands and move over the planet" {
-            val rover = Rover.landsOn(LocationMother.origin)
+            val rover = Rover.landsOver(LocationMother.origin)
             val command = Command.of(value = "LLFFFRFF").shouldBeRight()
 
             rover.execute(command)
@@ -22,7 +22,7 @@ internal class RoverSpec : WordSpec({
         }
 
         "turn right" {
-            val rover = Rover.landsOn(LocationMother.origin)
+            val rover = Rover.landsOver(LocationMother.origin)
 
             rover.turnRight()
 
@@ -30,7 +30,7 @@ internal class RoverSpec : WordSpec({
         }
 
         "turn left" {
-            val rover = Rover.landsOn(LocationMother.origin)
+            val rover = Rover.landsOver(LocationMother.origin)
 
             rover.turnLeft()
 
@@ -38,7 +38,7 @@ internal class RoverSpec : WordSpec({
         }
 
         "move forward" {
-            val rover = Rover.landsOn(LocationMother.origin)
+            val rover = Rover.landsOver(LocationMother.origin)
 
             rover.moveForward()
 

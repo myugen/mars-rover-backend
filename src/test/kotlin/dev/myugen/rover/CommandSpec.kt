@@ -33,7 +33,7 @@ internal class CommandSpec : WordSpec({
             row("moving forward", "F", LocationMother.origin, LocationMother.fixture { at { y = 1 } }),
         ) { indication, commandValue, currentLocation, expectedLocation ->
             "execute $indication on rover" {
-                val rover = Rover.landsOn(currentLocation)
+                val rover = Rover.landsOver(currentLocation)
                 val command = Command.of(commandValue).shouldBeRight()
 
                 command.executeIndicationsOn(rover)
