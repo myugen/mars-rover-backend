@@ -38,7 +38,7 @@ internal class CommandSpec : WordSpec({
 
                 command.executeIndicationsOn(rover)
 
-                rover.currentLocation() shouldBe expectedLocation
+                rover.currentLocation shouldBe expectedLocation
             }
         }
     }

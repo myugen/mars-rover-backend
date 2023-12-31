@@ -14,7 +14,7 @@ internal class PathSpec : WordSpec({
 
             path.add(anotherLocation)
 
-            path.currentLocation() shouldBe anotherLocation
+            path.currentLocation shouldBe anotherLocation
         }
     }
 
