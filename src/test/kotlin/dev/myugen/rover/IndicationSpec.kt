@@ -9,9 +9,9 @@ import io.kotest.data.row
 internal class IndicationSpec : WordSpec({
     "Indication" should {
         forAll(
-            row('R', TurnRightIndication),
-            row('L', TurnLeftIndication),
-            row('F', MoveForwardIndication),
+            row('R', Indication.TurnRight),
+            row('L', Indication.TurnLeft),
+            row('F', Indication.MoveForward),
         ) { value, expectedIndication ->
             "create a corresponding for $value" {
                 Indication.of(value) shouldBeRight expectedIndication
@@ -19,7 +19,7 @@ internal class IndicationSpec : WordSpec({
         }
 
         "fail when it does not exist corresponding one" {
-            Indication.of('T') shouldBeLeft NoExistIndicationError(reason = "No exist indication for 'T'")
+            Indication.of('T') shouldBeLeft IndicationFailure.NotExist('T')
         }
     }
 })

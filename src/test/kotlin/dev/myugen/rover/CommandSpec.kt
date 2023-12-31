@@ -13,12 +13,11 @@ import io.kotest.matchers.shouldBe
 internal class CommandSpec : WordSpec({
     "Command" should {
         "fail when is empty" {
-            Command.of("") shouldBeLeft EmptyCommandError
+            Command.of("") shouldBeLeft CommandFailure.Empty
         }
 
         "fail when command has not existing indication" {
-            Command.of("LGFFTRRM") shouldBeLeft InvalidCommandError(
-                reason = "Invalid command",
+            Command.of("LGFFTRRM") shouldBeLeft CommandFailure.Invalid(
                 details = listOf(
                     "No exist indication for 'G'",
                     "No exist indication for 'T'",
