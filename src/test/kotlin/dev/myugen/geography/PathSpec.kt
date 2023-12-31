@@ -10,7 +10,7 @@ internal class PathSpec : WordSpec({
     "Path" should {
         "add another location" {
             val path = Path.startsAt(origin)
-            val anotherLocation = fixture { point { x = 5; y = 5 }; direction = East }
+            val anotherLocation = fixture { at { x = 5; y = 5 }; facing = East }
 
             path.add(anotherLocation)
 

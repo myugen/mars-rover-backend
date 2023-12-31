@@ -16,8 +16,8 @@ internal class RoverSpec : WordSpec({
             rover.execute(command)
 
             rover.currentLocation shouldBe LocationMother.fixture {
-                point { x = -2; y = -3 }
-                direction = West
+                at { x = -2; y = -3 }
+                facing = West
             }
         }
 
@@ -26,7 +26,7 @@ internal class RoverSpec : WordSpec({
 
             rover.turnRight()
 
-            rover.currentLocation shouldBe LocationMother.fixture { direction = East }
+            rover.currentLocation shouldBe LocationMother.fixture { facing = East }
         }
 
         "turn left" {
@@ -34,7 +34,7 @@ internal class RoverSpec : WordSpec({
 
             rover.turnLeft()
 
-            rover.currentLocation shouldBe LocationMother.fixture { direction = West }
+            rover.currentLocation shouldBe LocationMother.fixture { facing = West }
         }
 
         "move forward" {
@@ -42,7 +42,7 @@ internal class RoverSpec : WordSpec({
 
             rover.moveForward()
 
-            rover.currentLocation shouldBe LocationMother.fixture { point { y = 1 } }
+            rover.currentLocation shouldBe LocationMother.fixture { at { y = 1 } }
         }
     }
 })

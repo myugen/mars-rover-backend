@@ -28,9 +28,9 @@ internal class CommandSpec : WordSpec({
         }
 
         forAll(
-            row("turning right", "R", LocationMother.origin, LocationMother.fixture { direction = East }),
-            row("turning left", "L", LocationMother.origin, LocationMother.fixture { direction = West }),
-            row("moving forward", "F", LocationMother.origin, LocationMother.fixture { point { y = 1 } }),
+            row("turning right", "R", LocationMother.origin, LocationMother.fixture { facing = East }),
+            row("turning left", "L", LocationMother.origin, LocationMother.fixture { facing = West }),
+            row("moving forward", "F", LocationMother.origin, LocationMother.fixture { at { y = 1 } }),
         ) { indication, commandValue, currentLocation, expectedLocation ->
             "execute $indication on rover" {
                 val rover = Rover.landsOn(currentLocation)

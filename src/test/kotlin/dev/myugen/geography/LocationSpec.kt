@@ -10,19 +10,19 @@ internal class LocationSpec : WordSpec({
         "turn right" {
             val actual = LocationMother.origin.turnRight()
 
-            actual shouldBe LocationMother.fixture { direction = East }
+            actual shouldBe LocationMother.fixture { facing = East }
         }
 
         "turn left" {
             val actual = LocationMother.origin.turnLeft()
 
-            actual shouldBe LocationMother.fixture { direction = West }
+            actual shouldBe LocationMother.fixture { facing = West }
         }
 
         "moveForward" {
             val actual = LocationMother.origin.moveForward()
 
-            actual shouldBe LocationMother.fixture { point { y = 1 } }
+            actual shouldBe LocationMother.fixture { at { y = 1 } }
         }
     }
 

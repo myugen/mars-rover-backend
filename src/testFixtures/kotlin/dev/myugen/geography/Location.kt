@@ -23,14 +23,14 @@ object LocationMother : Initializer<Location, LocationBuilder> {
  */
 class LocationBuilder(
     private var builtPoint: Point = PointMother.origin,
-    var direction: Direction = North
+    var facing: Direction = North
 ) : Builder<Location> {
 
-    fun point(init: PointBuilder.() -> Unit) {
+    fun at(init: PointBuilder.() -> Unit) {
         builtPoint = PointBuilder().apply(init).build()
     }
 
-    override fun build() = Location(builtPoint, direction)
+    override fun build() = Location(builtPoint, facing)
 
 }
 
