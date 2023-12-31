@@ -26,6 +26,6 @@ class Rover private constructor(private val travelledPath: Path) {
     }
 
     companion object {
-        fun landOnto(initialLocation: Location) = Rover(Path.startsAt(initialLocation))
+        fun landsOn(initialLocation: Location) = Rover(Path.startsAt(initialLocation))
     }
 }
