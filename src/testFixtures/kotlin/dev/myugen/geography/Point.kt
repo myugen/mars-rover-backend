@@ -2,7 +2,10 @@ package dev.myugen.geography
 
 import dev.myugen.common.Builder
 
-object PointMother {
+internal val Point.Companion.fixture: PointFixture
+    get() = PointFixture
+
+internal object PointFixture {
     /**
      * Origin point references [PointBuilder] default value
      */
@@ -10,8 +13,10 @@ object PointMother {
 }
 
 /**
- * Builder for [Point]. Default value, (0, 0)
+ * Builder for [Point].
+ *
+ * Default: `(0, 0)`
  */
-class PointBuilder(var x: Int = 0, var y: Int = 0) : Builder<Point> {
+internal class PointBuilder(var x: Int = 0, var y: Int = 0) : Builder<Point> {
     override fun build() = Point(x, y)
 }

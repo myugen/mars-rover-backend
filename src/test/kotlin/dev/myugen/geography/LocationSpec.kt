@@ -8,21 +8,21 @@ import io.kotest.matchers.shouldBe
 internal class LocationSpec : WordSpec({
     "Location" should {
         "turn right" {
-            val actual = LocationMother.origin.turnRight()
+            val actual = Location.fixture.origin.turnRight()
 
-            actual shouldBe LocationMother.fixture { facing = East }
+            actual shouldBe Location.fixture.init { facing = East }
         }
 
         "turn left" {
-            val actual = LocationMother.origin.turnLeft()
+            val actual = Location.fixture.origin.turnLeft()
 
-            actual shouldBe LocationMother.fixture { facing = West }
+            actual shouldBe Location.fixture.init { facing = West }
         }
 
         "moveForward" {
-            val actual = LocationMother.origin.moveForward()
+            val actual = Location.fixture.origin.moveForward()
 
-            actual shouldBe LocationMother.fixture { at { y = 1 } }
+            actual shouldBe Location.fixture.init { at { y = 1 } }
         }
     }
 
