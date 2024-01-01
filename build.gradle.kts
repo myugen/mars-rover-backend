@@ -1,7 +1,6 @@
 plugins {
     kotlin("jvm") version "1.9.21"
-    kotlin("plugin.allopen") version "1.9.21"
-    id("io.quarkus")
+    id("com.google.devtools.ksp") version "1.9.21-1.0.16"
     id("java-test-fixtures")
 }
 
@@ -10,21 +9,15 @@ repositories {
     mavenLocal()
 }
 
-val quarkusPlatformGroupId: String by project
-val quarkusPlatformArtifactId: String by project
-val quarkusPlatformVersion: String by project
+val arrowVersion: String by project
 val kotestVersion: String by project
 
 dependencies {
-    implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
-    implementation("io.arrow-kt:arrow-core:1.2.0")
-    implementation("io.quarkus:quarkus-resteasy-reactive-jackson")
-    implementation("io.quarkus:quarkus-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("io.quarkus:quarkus-arc")
-    implementation("io.quarkus:quarkus-resteasy-reactive")
-    testImplementation("io.quarkus:quarkus-junit5")
-    testImplementation("io.rest-assured:rest-assured")
+    implementation(platform("io.arrow-kt:arrow-stack:$arrowVersion"))
+    implementation("io.arrow-kt:arrow-core")
+    implementation("io.arrow-kt:arrow-optics")
+    ksp("io.arrow-kt:arrow-optics-ksp-plugin:$arrowVersion")
     testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
     testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
     testImplementation("io.kotest:kotest-assertions-json:$kotestVersion")
@@ -40,13 +33,7 @@ java {
 }
 
 tasks.withType<Test> {
-    systemProperty("java.util.logging.manager", "org.jboss.logmanager.LogManager")
     useJUnitPlatform()
-}
-allOpen {
-    annotation("jakarta.ws.rs.Path")
-    annotation("jakarta.enterprise.context.ApplicationScoped")
-    annotation("io.quarkus.test.junit.QuarkusTest")
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {

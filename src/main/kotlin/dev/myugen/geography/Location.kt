@@ -1,11 +1,16 @@
 package dev.myugen.geography
 
+import arrow.optics.copy
+import arrow.optics.optics
 import dev.myugen.direction.Direction
 
+@optics
 data class Location(val at: Point, val facing: Direction) {
-    fun turnRight() = copy(facing = facing.onRight)
+    companion object
 
-    fun turnLeft() = copy(facing = facing.onLeft)
+    fun turnRight() = copy { Location.facing transform { it.onRight } }
 
-    fun moveForward() = copy(at = at.applies(Vector.of(facing)))
+    fun turnLeft() = copy { Location.facing transform { it.onLeft } }
+
+    fun moveForward() = copy { Location.at transform { it.applies(Vector.of(facing)) } }
 }

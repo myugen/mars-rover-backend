@@ -1,6 +1,11 @@
 package dev.myugen.direction
 
+import arrow.optics.optics
+
+@optics
 sealed interface Direction {
+    companion object
+
     val onLeft: Direction
     val onRight: Direction
 }

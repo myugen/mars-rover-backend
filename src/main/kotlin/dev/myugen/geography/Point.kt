@@ -1,5 +1,14 @@
 package dev.myugen.geography
 
+import arrow.optics.copy
+import arrow.optics.optics
+
+@optics
 data class Point(val x: Int, val y: Int) {
-    fun applies(vector: Vector) = copy(x = x + vector.x, y = y + vector.y)
+    companion object
+
+    fun applies(vector: Vector) = copy {
+        Point.x transform { it + vector.x }
+        Point.y transform { it + vector.y }
+    }
 }

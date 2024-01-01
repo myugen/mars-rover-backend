@@ -3,7 +3,7 @@ package dev.myugen.geography
 import io.kotest.core.spec.style.WordSpec
 import io.kotest.matchers.shouldBe
 
-class PointSpec : WordSpec({
+internal class PointSpec : WordSpec({
     "Point" should {
         "apply a vector" {
             val vector = Vector(1, 0)
