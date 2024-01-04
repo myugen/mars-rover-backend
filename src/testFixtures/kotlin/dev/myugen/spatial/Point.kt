@@ -1,4 +1,4 @@
-package dev.myugen.geography
+package dev.myugen.spatial
 
 import dev.myugen.common.Builder
 

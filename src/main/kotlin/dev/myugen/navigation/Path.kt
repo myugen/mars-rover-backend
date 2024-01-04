@@ -1,4 +1,4 @@
-package dev.myugen.geography
+package dev.myugen.navigation
 
 class Path private constructor(private val locations: MutableList<Location>) {
     val currentLocation: Location

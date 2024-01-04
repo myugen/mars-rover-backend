@@ -1,4 +1,4 @@
-package dev.myugen.geography
+package dev.myugen.spatial
 
 import arrow.optics.copy
 import arrow.optics.optics

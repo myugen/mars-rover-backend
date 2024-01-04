@@ -1,9 +1,10 @@
 package dev.myugen.rover
 
-import dev.myugen.direction.East
-import dev.myugen.direction.West
-import dev.myugen.geography.Location
-import dev.myugen.geography.fixture
+import dev.myugen.navigation.Location
+import dev.myugen.navigation.fixture
+import dev.myugen.spatial.East
+import dev.myugen.spatial.Planet
+import dev.myugen.spatial.West
 import io.kotest.assertions.arrow.core.shouldBeLeft
 import io.kotest.assertions.arrow.core.shouldBeRight
 import io.kotest.core.spec.style.WordSpec
@@ -28,12 +29,24 @@ internal class CommandSpec : WordSpec({
         }
 
         forAll(
-            row("turning right", "R", Location.fixture.origin, Location.fixture.init { facing = East }),
-            row("turning left", "L", Location.fixture.origin, Location.fixture.init { facing = West }),
-            row("moving forward", "F", Location.fixture.origin, Location.fixture.init { at { y = 1 } }),
+            row(
+                "turning right",
+                "R",
+                Location.fixture.origin(Planet(5, 5)),
+                Location.fixture.init { on = Planet(5, 5); facing = East }),
+            row(
+                "turning left",
+                "L",
+                Location.fixture.origin(Planet(5, 5)),
+                Location.fixture.init { on = Planet(5, 5); facing = West }),
+            row(
+                "moving forward",
+                "F",
+                Location.fixture.origin(Planet(5, 5)),
+                Location.fixture.init { on = Planet(5, 5); at { y = 1 } }),
         ) { indication, commandValue, currentLocation, expectedLocation ->
             "execute $indication on rover" {
-                val rover = Rover.landsOver(currentLocation)
+                val rover = Rover.landsIn(currentLocation)
                 val command = Command.of(commandValue).shouldBeRight()
 
                 command.executeIndicationsOn(rover)

@@ -1,11 +1,14 @@
-package dev.myugen.geography
+package dev.myugen.navigation
 
 import arrow.optics.copy
 import arrow.optics.optics
-import dev.myugen.direction.Direction
+import dev.myugen.spatial.Direction
+import dev.myugen.spatial.Planet
+import dev.myugen.spatial.Point
+import dev.myugen.spatial.Vector
 
 @optics
-data class Location(val at: Point, val facing: Direction) {
+data class Location(val on: Planet, val at: Point, val facing: Direction) {
     companion object
 
     fun turnRight() = copy { Location.facing transform { it.onRight } }

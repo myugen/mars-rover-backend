@@ -1,9 +1,8 @@
-package dev.myugen.geography
+package dev.myugen.navigation
 
 import dev.myugen.common.Builder
 import dev.myugen.common.Initializer
-import dev.myugen.direction.Direction
-import dev.myugen.direction.North
+import dev.myugen.spatial.*
 
 internal val Location.Companion.fixture: LocationFixture
     get() = LocationFixture
@@ -17,26 +16,28 @@ internal object LocationFixture : Initializer<Location, LocationBuilder> {
     override fun init(init: LocationBuilder.() -> Unit) = LocationBuilder().apply(init).build()
 
     /**
-     * Origin location references [init] default value
+     * Create location on given [Planet] with point in [PointFixture.origin] and facing [North]
      */
-    val origin = init { }
+    fun origin(on: Planet) = init {
+        this.on = on
+    }
 }
 
 /**
  * Builder for [Location].
  *
- * Default: [Point] as [PointFixture.origin] and [Direction] as [North]
+ * Default: [Planet] with [PlanetFixture.noSize], [Point] in [PointFixture.origin] and [Direction] at [North]
  */
 internal class LocationBuilder(
-    private var builtPoint: Point = Point.fixture.origin,
-    var facing: Direction = North
+    var on: Planet = Planet.fixture.noSize,
+    var facing: Direction = North,
+    private var point: Point = Point.fixture.origin,
 ) : Builder<Location> {
-
     fun at(init: PointBuilder.() -> Unit) {
-        builtPoint = PointBuilder().apply(init).build()
+        point = PointBuilder().apply(init).build()
     }
 
-    override fun build() = Location(builtPoint, facing)
+    override fun build() = Location(on, point, facing)
 
 }
 

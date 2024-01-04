@@ -1,4 +1,4 @@
-package dev.myugen.direction
+package dev.myugen.spatial
 
 import arrow.optics.optics
 

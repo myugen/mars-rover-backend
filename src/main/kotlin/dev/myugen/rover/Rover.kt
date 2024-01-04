@@ -1,7 +1,7 @@
 package dev.myugen.rover
 
-import dev.myugen.geography.Location
-import dev.myugen.geography.Path
+import dev.myugen.navigation.Location
+import dev.myugen.navigation.Path
 
 class Rover private constructor(private val travelledPath: Path) {
     val currentLocation: Location
@@ -27,6 +27,6 @@ class Rover private constructor(private val travelledPath: Path) {
     }
 
     companion object {
-        fun landsOver(initialLocation: Location) = Rover(Path.startsAt(initialLocation))
+        fun landsIn(initialLocation: Location) = Rover(Path.startsAt(initialLocation))
     }
 }

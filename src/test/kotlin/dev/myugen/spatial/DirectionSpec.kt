@@ -1,4 +1,4 @@
-package dev.myugen.direction
+package dev.myugen.spatial
 
 import io.kotest.core.spec.style.WordSpec
 import io.kotest.data.row

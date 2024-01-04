@@ -1,6 +1,4 @@
-package dev.myugen.geography
-
-import dev.myugen.direction.*
+package dev.myugen.spatial
 
 data class Vector(val x: Int, val y: Int) {
     companion object {
