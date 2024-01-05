@@ -64,6 +64,14 @@ data class Command(private val value: String) {
             return currentLocation.copy(point = currentLocation.point.copy(y = yValue))
         }
 
+        fun withFacingNorth(): Location {
+            var yValue = currentLocation.point.y - DIFFERENCE_VALUE_BETWEEN_COORDINATES
+            if (currentLocation.point.y == INITIAL_COORDINATE_VALUE_IN_BOTH_AXES) {
+                yValue = planetSize.y - DIFFERENCE_VALUE_BETWEEN_COORDINATES;
+            }
+            return currentLocation.copy(point = currentLocation.point.copy(y = yValue))
+        }
+
         if (currentLocation.direction == South) {
             return withFacingSouth()
         }
@@ -76,11 +84,9 @@ data class Command(private val value: String) {
             return withFacingWest()
         }
 
-        var yValue = currentLocation.point.y - DIFFERENCE_VALUE_BETWEEN_COORDINATES
-        if (currentLocation.point.y == INITIAL_COORDINATE_VALUE_IN_BOTH_AXES) {
-            yValue = planetSize.y - DIFFERENCE_VALUE_BETWEEN_COORDINATES;
-        }
-        return currentLocation.copy(point = currentLocation.point.copy(y = yValue))
+        return withFacingNorth()
+
+
     }
 
     private fun turnRight(currentLocation: Location) = currentLocation.copy(direction = currentLocation.direction.turnRight)
