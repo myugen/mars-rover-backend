@@ -29,6 +29,8 @@ internal class PlanetSpec : WordSpec({
             row("never crosses the limits", Planet(5, 5), Point(1, 1), Point(1, 1)),
             row("crosses the vertical limit from above", Planet(5, 5), Point(2, 3), Point(2, -2)),
             row("crosses the vertical limit from below", Planet(5, 5), Point(2, -3), Point(2, 2)),
+            row("crosses the horizontal limit from right", Planet(5, 5), Point(3, 2), Point(-2, 2)),
+            row("crosses the horizontal limit from left", Planet(5, 5), Point(-3, 2), Point(2, 2)),
         ) { testCase, currentPlanet, currentPoint, expectedPoint ->
             "determine the current position of a point that $testCase" {
                 val actualPoint = currentPlanet.determineCurrentPositionOf(currentPoint)

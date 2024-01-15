@@ -27,6 +27,16 @@ internal class RoverSpec : WordSpec({
                 Location.fixture.origin(on = Planet(5, 5)),
                 "RRFLFRFF",
                 Location.fixture.init { on = Planet(5, 5); at { x = 1; y = 2 }; facing = South }),
+            row(
+                "crossing horizontally from right",
+                Location.fixture.origin(on = Planet(5, 5)),
+                "RFLFRFFF",
+                Location.fixture.init { on = Planet(5, 5); at { x = -1; y = 1 }; facing = East }),
+            row(
+                "crossing horizontally from left",
+                Location.fixture.origin(on = Planet(5, 5)),
+                "LFLFRFFF",
+                Location.fixture.init { on = Planet(5, 5); at { x = 1; y = -1 }; facing = West }),
         ) { testCase, initialLocation, commandValue, expectedLocation ->
             "receive command and move over the planet $testCase" {
                 val rover = Rover.landsIn(initialLocation)

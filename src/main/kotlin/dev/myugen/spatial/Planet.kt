@@ -2,6 +2,7 @@ package dev.myugen.spatial
 
 import arrow.optics.copy
 import arrow.optics.optics
+import kotlin.math.absoluteValue
 
 @optics
 data class Planet(val width: Int, val height: Int) {
@@ -16,15 +17,30 @@ data class Planet(val width: Int, val height: Int) {
         get() = if (width % 2 == 0) (-width + 1) / 2 else -width / 2
 
     fun determineCurrentPositionOf(point: Point): Point {
-        return if (point.y > maxY) {
-            val gap = point.y - maxY
-            val currentY = (minY + gap) - 1
-            point.copy { Point.y transform { currentY } }
-        } else if (point.y < minX) {
-            val gap = minY - point.y
-            val currentY = (maxY + gap) - 1
-            point.copy { Point.y transform { currentY } }
-        } else point
+        return when {
+            (point.y > maxY) -> {
+                point.copy { Point.y transform { normalizeExceededAxis(point.y, maxY, minY) } }
+            }
+
+            (point.y < minY) -> {
+                point.copy { Point.y transform { normalizeExceededAxis(point.y, minY, maxY) } }
+            }
+
+            (point.x > maxX) -> {
+                point.copy { Point.x transform { normalizeExceededAxis(point.x, maxX, minX) } }
+            }
+
+            (point.x < minX) -> {
+                point.copy { Point.x transform { normalizeExceededAxis(point.x, minX, maxX) } }
+            }
+
+            else -> point
+        }
+    }
+
+    private fun normalizeExceededAxis(exceededAxis: Int, limitAxis: Int, correctAxis: Int): Int {
+        val gap = exceededAxis.absoluteValue - limitAxis.absoluteValue
+        return correctAxis + gap - 1
     }
 
     companion object
