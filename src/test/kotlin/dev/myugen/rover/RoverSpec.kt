@@ -2,10 +2,7 @@ package dev.myugen.rover
 
 import dev.myugen.navigation.Location
 import dev.myugen.navigation.fixture
-import dev.myugen.spatial.East
-import dev.myugen.spatial.North
-import dev.myugen.spatial.Planet
-import dev.myugen.spatial.West
+import dev.myugen.spatial.*
 import io.kotest.assertions.arrow.core.shouldBeRight
 import io.kotest.core.spec.style.WordSpec
 import io.kotest.data.forAll
@@ -25,6 +22,11 @@ internal class RoverSpec : WordSpec({
                 Location.fixture.origin(on = Planet(5, 5)),
                 "FFRFLFFF",
                 Location.fixture.init { on = Planet(5, 5); at { x = 1; y = 0 }; facing = North }),
+            row(
+                "crossing vertically from below",
+                Location.fixture.origin(on = Planet(5, 5)),
+                "RRFLFRFF",
+                Location.fixture.init { on = Planet(5, 5); at { x = 1; y = 2 }; facing = South }),
         ) { testCase, initialLocation, commandValue, expectedLocation ->
             "receive command and move over the planet $testCase" {
                 val rover = Rover.landsIn(initialLocation)
