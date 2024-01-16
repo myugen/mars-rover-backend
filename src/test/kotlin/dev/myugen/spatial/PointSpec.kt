@@ -13,6 +13,16 @@ internal class PointSpec : WordSpec({
 
             actual shouldBe Point(-3, 5)
         }
+
+        "normalize based on limits" {
+            val horizontalLimit = Limit.Horizontal(-2, 2)
+            val verticalLimit = Limit.Vertical(-1, 1)
+            val point = Point(3, 4)
+
+            val actual = point.normalizesBy(listOf(verticalLimit, horizontalLimit))
+
+            actual shouldBe Point(-2, 1)
+        }
     }
 
 })

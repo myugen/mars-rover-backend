@@ -15,5 +15,5 @@ data class Location(val on: Planet, val at: Point, val facing: Direction) {
 
     fun turnLeft() = copy { Location.facing transform { it.onLeft } }
 
-    fun moveForward() = copy { Location.at transform { on.determineCurrentPositionOf(it.applies(Vector.of(facing))) } }
+    fun moveForward() = copy { Location.at transform { point -> on.normalize(point.applies(Vector.of(facing))) } }
 }

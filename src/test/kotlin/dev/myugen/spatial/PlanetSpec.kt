@@ -10,19 +10,15 @@ internal class PlanetSpec : WordSpec({
         "calculate limits from given even sizes" {
             val planet = Planet(6, 4)
 
-            planet.maxX shouldBe 3
-            planet.minX shouldBe -2
-            planet.maxY shouldBe 2
-            planet.minY shouldBe -1
+            planet.horizontalLimit shouldBe Limit.Horizontal(-2, 3)
+            planet.verticalLimit shouldBe Limit.Vertical(-1, 2)
         }
 
         "calculate limits from given odd sizes" {
             val planet = Planet(5, 7)
 
-            planet.maxX shouldBe 2
-            planet.minX shouldBe -2
-            planet.maxY shouldBe 3
-            planet.minY shouldBe -3
+            planet.horizontalLimit shouldBe Limit.Horizontal(-2, 2)
+            planet.verticalLimit shouldBe Limit.Vertical(-3, 3)
         }
 
         forAll(
@@ -32,8 +28,8 @@ internal class PlanetSpec : WordSpec({
             row("crosses the horizontal limit from right", Planet(5, 5), Point(3, 2), Point(-2, 2)),
             row("crosses the horizontal limit from left", Planet(5, 5), Point(-3, 2), Point(2, 2)),
         ) { testCase, currentPlanet, currentPoint, expectedPoint ->
-            "determine the current position of a point that $testCase" {
-                val actualPoint = currentPlanet.determineCurrentPositionOf(currentPoint)
+            "normalize the point that $testCase" {
+                val actualPoint = currentPlanet.normalize(currentPoint)
 
                 actualPoint shouldBe expectedPoint
             }
